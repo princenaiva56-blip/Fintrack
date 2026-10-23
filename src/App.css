@@ -548,28 +548,68 @@ a {
   }
 }
 
-/*Delete Transaction Button*/
+.transaction-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-.delete-transaction-btn {
+.transaction-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
   padding: 8px 12px;
-  background: #fff1f2;
-  color: #e11d48;
-  border: 1px solid #fecdd3;
+  border: 1px solid transparent;
   border-radius: 8px;
+
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-left: 10px;
+
+  transition: background-color 0.2s ease,
+              transform 0.2s ease;
 }
 
-.delete-transaction-btn:hover {
-  background: #ffe4e6;
-  border-color: #fda4af;
+.edit-btn {
+  background-color: #e6f5ee;
+  color: #167d62;
 }
 
-.delete-transaction-btn:active {
+.edit-btn:hover {
+  background-color: #ccebdc;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background-color: #fdecec;
+  color: #c0392b;
+}
+
+.delete-btn:hover {
+  background-color: #fad5d5;
+  transform: translateY(-1px);
+}
+
+.transaction-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.transaction-btn:active {
   transform: scale(0.97);
+}
+
+@media (max-width: 600px) {
+  .transaction-actions {
+    gap: 5px;
+  }
+
+  .transaction-btn {
+    padding: 7px 9px;
+    font-size: 12px;
+  }
 }
 
 /*Recent Transactions empty state*/
@@ -591,4 +631,38 @@ a {
   margin: 0;
   color: #64748b;
   font-size: 14px;
+}
+/*Transaction for Modal Overlay*/
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 18px;
+    border-radius: 12px;
+  }
 }

@@ -3,6 +3,8 @@ import {ChartNoAxesCombined, LayoutDashboard, ArrowLeftRight, Wallet, ChartPie, 
   Settings,
   Bell,
   Search,
+  Pencil,
+  Trash2
 } from 'lucide-react'
 import './App.css'
 import { useState, useEffect } from 'react';
@@ -97,12 +99,21 @@ const [transactions, setTransactions] = useState(() =>{
             </button>
 
           </div>
-
-          {isFormOpen && (
-            <div className="form-container">
-              <TransactionForm key={editingTransaction?.id ?? "new"} onCancel={() => {setIsFormOpen(false); setEditingTransaction(null)}} onSave={handleSaveTransaction} transactionToEdit={editingTransaction}/>
-            </div>
-          )}
+            {isFormOpen && (
+              <div className="modal-overlay">
+                <div className="modal-content">
+                  <TransactionForm
+                    key={editingTransaction?.id ?? "new"}
+                    transactionToEdit={editingTransaction}
+                    onSave={handleSaveTransaction}
+                    onCancel={() => {
+                      setIsFormOpen(false);
+                      setEditingTransaction(null);
+                    }}
+                  />
+                </div>
+              </div>
+            )}
 
           <div className="welcome-panel">
             <h2>Your money, clearly understood.</h2>
@@ -156,15 +167,23 @@ const [transactions, setTransactions] = useState(() =>{
           KSh {transaction.amount.toLocaleString("en-KE")}
         </p>
 
-        <button
-          type="button"
-          className="delete-transaction-btn"
-          onClick={() => handleDeleteTransaction(transaction.id)}
-        >
-          Delete
-        </button>
+        <div className="transaction-actions">
+          <button
+            className="transaction-btn edit-btn"
+            onClick={() => handleEditTransaction(transaction)}
+          >
+            <Pencil size={15} />
+            <span>Edit</span>
+          </button>
 
-        <button onClick={() => handleEditTransaction(transaction)}>Edit</button>
+          <button
+            className="transaction-btn delete-btn"
+            onClick={() => handleDeleteTransaction(transaction.id)}
+          >
+            <Trash2 size={15} />
+            <span>Delete</span>
+          </button>
+        </div>
       </div>
     ))
   )}
